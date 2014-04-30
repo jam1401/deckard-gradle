@@ -61,7 +61,12 @@ android {
 androidTest {
     include '**/*Test.class'
     exclude '**/espresso/**/*.class'
+
+
+    // configure max heap size of the test JVM
+    maxHeapSize = "2048m"
 }
+
 
 dependencies {
     repositories {
@@ -78,8 +83,7 @@ dependencies {
     compile 'com.squareup.dagger:dagger:+'
     apt "com.jakewharton:butterknife:4.0+"
     apt 'com.squareup.dagger:dagger-compiler:1.2.1'
-    // Espresso
-    instrumentTestCompile files('lib/espresso-1.1.jar', 'lib/testrunner-1.1.jar', 'lib/testrunner-runtime-1.1.jar')
+
     instrumentTestCompile 'com.google.guava:guava:14.0.1',
             'com.squareup.dagger:dagger:1.2.1',
             'org.hamcrest:hamcrest-integration:1.1',
@@ -89,6 +93,7 @@ dependencies {
     instrumentTestCompile('junit:junit:4.11') {
         exclude module: 'hamcrest-core'
     }
+
     instrumentTestCompile('org.robolectric:robolectric:2.3-SNAPSHOT') {
         exclude module: 'classworlds'
         exclude module: 'maven-artifact'
@@ -108,9 +113,13 @@ dependencies {
         exclude module: 'wagon-http-shared'
         exclude module: 'wagon-provider-api'
     }
+
     instrumentTestCompile 'com.squareup:fest-android:1.0.+'
-    instrumentTestCompile 'org.mockito:mockito-all:+'
+    instrumentTestCompile 'org.mockito:mockito-core:+'
     instrumentTestCompile 'com.squareup.dagger:dagger-compiler:1.2.1'
+
+    // Espresso
+    instrumentTestCompile files('lib/espresso-1.1-r2.jar', 'lib/espresso-runner-1.1-r2.jar', 'lib/espresso-runner-runtime-1.1-r2.jar', 'lib/espresso-support-v4-1.1-r2.jar')
 }
 
 
